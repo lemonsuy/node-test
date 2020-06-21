@@ -1,17 +1,15 @@
 FROM node:10-alpine
 
-RUN mkdir -p /var/www/html/app/node_modules && chown -R node:node /var/www/html/app
+RUN mkdir -p /var/www/html/app
 
 WORKDIR /var/www/html/app
 
 COPY package*.json ./
 
-USER node
-
 RUN npm install
 
-COPY --chown=node:node . .
+COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
-CMD [ "node", "server.js" ]
+CMD [ "pm2 start", "server.js" ]
