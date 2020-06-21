@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nodejs-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /var/www/html/app
+    # command: tail -F /dev/null 
+    command: npm start
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/var/www/html/app
+    networks:
+      - smartcity-network
+
+networks:
+  smartcity-network:
